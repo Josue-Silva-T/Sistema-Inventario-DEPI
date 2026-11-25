@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1b2f4f">
+  <title>Sistema de Inventariado · División DEPI</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&family=Source+Serif+4:ital,wght@0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="hoja">
+    <header class="cabecera">
+      <h1>Sistema de Inventariado</h1>
+      <p class="subtitulo">División DEPI</p>
+    </header>
+
+    <p class="intro">Registre equipos, dispositivos y materiales. Cada registro se guarda en la hoja de cálculo institucional.</p>
+
+    <div id="configuracion" class="nota nota-error" role="alert" hidden>
+      La aplicación no está conectada al servidor. Configure <code>GOOGLE_SCRIPT_URL</code> en <code>config.js</code>.
+    </div>
+
+    <form id="formulario" novalidate autocomplete="off">
+
+      <fieldset>
+        <legend>Identificación</legend>
+
+        <div class="campo">
+          <label for="codigoBarras">Código de barras <span class="req">Opcional</span></label>
+          <div class="con-boton">
+            <input id="codigoBarras" name="codigoBarras" type="text" inputmode="text" maxlength="64"
+                   autocapitalize="off" spellcheck="false" aria-describedby="ayuda-codigo err-codigoBarras">
+            <button type="button" id="btnEscanear" class="btn btn-secundario">Escanear</button>
+          </div>
+          <p id="ayuda-codigo" class="ayuda">Escanee con la cámara o escriba los dígitos a mano.</p>
+          <p id="err-codigoBarras" class="error" hidden></p>
+
+          <div id="visor" class="visor" hidden>
+            <div class="visor-marco">
+              <video id="video" playsinline muted></video>
+              <span class="guia" aria-hidden="true"></span>
+            </div>
+            <button type="button" id="btnDetener" class="btn btn-secundario">Detener escáner</button>
+          </div>
+
+          <p id="estadoEscaner" class="estado-escaner" role="status" aria-live="polite" hidden></p>
+          <p id="lectura" class="lectura" hidden>
+            <span class="lectura-titulo">Código leído</span>
+            <span id="lecturaValor" class="lectura-valor"></span>
+          </p>
+        </div>
+
+        <div class="campo">
+          <label for="numeroSerie">Número de serie <span class="req">Obligatorio</span></label>
+          <input id="numeroSerie" name="numeroSerie" type="text" maxlength="100" required
+                 autocapitalize="characters" spellcheck="false" aria-describedby="err-numeroSerie">
+          <p id="err-numeroSerie" class="error" hidden></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Ubicación y descripción</legend>
+
+        <div class="campo">
+          <label for="ubicacion">Ubicación <span class="req">Obligatorio</span></label>
+          <input id="ubicacion" name="ubicacion" type="text" maxlength="120" required
+                 aria-describedby="ayuda-ubicacion err-ubicacion">
+          <p id="ayuda-ubicacion" class="ayuda">Edificio, piso, oficina o laboratorio.</p>
+          <p id="err-ubicacion" class="error" hidden></p>
+        </div>
+
+        <div class="campo">
+          <label for="descripcion">Descripción / Tipo <span class="req">Obligatorio</span></label>
+          <input id="descripcion" name="descripcion" type="text" maxlength="160" required
+                 aria-describedby="ayuda-descripcion err-descripcion">
+          <p id="ayuda-descripcion" class="ayuda">Por ejemplo: laptop, proyector, osciloscopio.</p>
+          <p id="err-descripcion" class="error" hidden></p>
+        </div>
+      </fieldset>
+
+      <fieldset aria-describedby="err-estado">
+        <legend>Estado <span class="req">Obligatorio</span></legend>
+        <div class="estados">
+          <label class="opcion"><input type="radio" name="estado" value="Bueno"><span>Bueno</span></label>
+          <label class="opcion"><input type="radio" name="estado" value="Regular"><span>Regular</span></label>
+          <label class="opcion"><input type="radio" name="estado" value="Malo"><span>Malo</span></label>
+        </div>
+        <p id="err-estado" class="error" hidden></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Observaciones</legend>
+        <div class="campo">
+          <label for="observaciones">Notas adicionales <span class="req">Opcional</span></label>
+          <textarea id="observaciones" name="observaciones" rows="4" maxlength="500"
+                    aria-describedby="err-observaciones"></textarea>
+          <p id="err-observaciones" class="error" hidden></p>
+        </div>
+      </fieldset>
+
+      <button type="submit" id="btnGuardar" class="btn btn-principal">Guardar registro</button>
+    </form>
+
+    <footer class="pie">
+      <p>Los registros se consultan y exportan desde Google Sheets.</p>
+    </footer>
+  </main>
+
+  <div id="aviso" class="aviso" hidden>
+    <p id="avisoTexto"></p>
+    <button type="button" id="avisoCerrar" aria-label="Cerrar aviso">Cerrar</button>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
