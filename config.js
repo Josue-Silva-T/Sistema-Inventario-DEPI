@@ -6,7 +6,7 @@
 
 // URL de la aplicación web de Apps Script (termina en /exec).
 // Se obtiene al implementar el backend; ver README, paso 13.
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyTaSEMhgee8VY0j2YTXmTukCFHs4OB6whVLVfiTC4xisoeU8OMdMU_XtNWKrjPYfUjbA/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIjoccFJeil-XAmOCUBWZvKrYhyx992-7mwSfu5x0MS41V7CA8IhkvGExYAiDMTrtqew/exec';
 
 // Token de aplicación (NO es un secreto). Debe ser igual a APP_TOKEN en Config.gs.
 const APP_TOKEN = 'Inventario_DEPI';
