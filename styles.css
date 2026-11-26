@@ -170,6 +170,18 @@ input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--
   overflow-wrap: anywhere;
 }
 
+/* Foto y controles de cámara */
+.acciones-foto { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem; }
+.acciones-foto .btn { width: 100%; }
+.controles-camara { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+.controles-camara .btn-icono { min-width: 3rem; padding: 0.4rem 0; font-size: 1.4rem; line-height: 1; }
+.controles-camara #btnEnfocar { margin-left: auto; }
+.zoom-valor {
+  min-width: 3.6rem; text-align: center;
+  font: 600 1.05rem var(--sans); font-variant-numeric: tabular-nums; color: var(--marino);
+}
+.btn-detener { width: 100%; }
+
 /* Notas y avisos */
 .nota { padding: 0.75rem 1rem; margin: 0 0 1.25rem; border-left: 4px solid; }
 .nota-error { background: var(--error-fondo); border-color: var(--error); color: var(--error); }

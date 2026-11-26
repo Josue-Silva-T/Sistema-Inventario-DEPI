@@ -36,7 +36,13 @@
                    autocapitalize="off" spellcheck="false" aria-describedby="ayuda-codigo err-codigoBarras">
             <button type="button" id="btnEscanear" class="btn btn-secundario">Escanear</button>
           </div>
-          <p id="ayuda-codigo" class="ayuda">Escanee con la cámara o escriba los dígitos a mano.</p>
+          <div class="acciones-foto">
+            <button type="button" id="btnTomarFoto" class="btn btn-secundario">Tomar foto</button>
+            <button type="button" id="btnSubirFoto" class="btn btn-secundario">Subir foto</button>
+            <input id="inputTomarFoto" type="file" accept="image/*" capture="environment" hidden>
+            <input id="inputSubirFoto" type="file" accept="image/*" hidden>
+          </div>
+          <p id="ayuda-codigo" class="ayuda">Escanee con la cámara, tome o suba una foto del código, o escriba los dígitos a mano.</p>
           <p id="err-codigoBarras" class="error" hidden></p>
 
           <div id="visor" class="visor" hidden>
@@ -44,7 +50,13 @@
               <video id="video" playsinline muted></video>
               <span class="guia" aria-hidden="true"></span>
             </div>
-            <button type="button" id="btnDetener" class="btn btn-secundario">Detener escáner</button>
+            <div class="controles-camara" role="group" aria-label="Controles de la cámara">
+              <button type="button" id="btnZoomMenos" class="btn btn-secundario btn-icono" aria-label="Alejar (menos zoom)">−</button>
+              <span id="zoomValor" class="zoom-valor" aria-live="polite">1,0×</span>
+              <button type="button" id="btnZoomMas" class="btn btn-secundario btn-icono" aria-label="Acercar (más zoom)">+</button>
+              <button type="button" id="btnEnfocar" class="btn btn-secundario">Enfocar</button>
+            </div>
+            <button type="button" id="btnDetener" class="btn btn-secundario btn-detener">Detener escáner</button>
           </div>
 
           <p id="estadoEscaner" class="estado-escaner" role="status" aria-live="polite" hidden></p>
